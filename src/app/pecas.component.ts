@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Peca } from './peca';
 import { PecaDetalheComponent } from './peca-detalhe.component';
 import { PecaService } from './peca.service';
@@ -6,8 +7,8 @@ import { PecaService } from './peca.service';
 
 @Component({
   selector: 'lista-pecas',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  templateUrl: './peca.component.html',
+  styleUrls: ['./peca.component.css'],
   providers: [PecaService]
 })
 
@@ -16,7 +17,7 @@ export class PecasComponent implements OnInit{
   selectedPeca: Peca;
   pecas : Peca[];
 
-  constructor(private pecaService: PecaService) { } 
+  constructor(private router: Router, private pecaService: PecaService) { } 
 
   onSelect(peca: Peca): void {
 	  this.selectedPeca = peca;
@@ -30,5 +31,8 @@ export class PecasComponent implements OnInit{
     this.getPecas();
   }
 
+  gotoDetail(): void {
+    this.router.navigate(['/detalhe', this.selectedPeca.id]);
+  }
   
 }

@@ -9,7 +9,8 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'peca-detalhe',
-  templateUrl: './peca-detalhe.component.html'
+  templateUrl: './peca-detalhe.component.html',
+  styleUrls: ['./peca-detalhe.component.css']
 })
 
 export class PecaDetalheComponent implements OnInit {

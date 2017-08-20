@@ -1,16 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Bem vindo a {{title}}!
-  </h1>
-</div>  
-  
-<ul class="pecas">
-  <li *ngFor="let peca of pecas" 
-      (click) = "onSelect(peca)"
-      [class.selected]="peca === selectedPeca" >
-            <span class="badge">{{peca.id}}</span> {{peca.nome}}
-  </li>
-</ul>  
-
-<peca-detalhe [peca]="selectedPeca"></peca-detalhe>
+<h1>{{title}}</h1>
+<nav>
+	<a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+	<a routerLink="/pecas" routerLinkActive="active">Pe&ccedil;as</a>
+</nav>
+<router-outlet></router-outlet>
