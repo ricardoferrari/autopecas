@@ -1,0 +1,8 @@
+<div *ngIf="peca">
+      <h2>Pe&ccedil;a: {{peca.nome}}</h2>
+      <div><label>id: </label>{{peca.id}}</div>
+      <div>
+        <label>Nome: </label>
+        <input [(ngModel)]="peca.nome" placeholder="nome"/>
+      </div>
+</div>

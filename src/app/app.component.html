@@ -13,10 +13,4 @@
   </li>
 </ul>  
 
-
-<div *ngIf="selectedPeca">
-  <h2>Pe&ccedil;a: {{selectedPeca.nome}}</h2>
-  <div><label>ID: </label>{{selectedPeca.id}}</div>
-  <div><label>Nome: </label><input [(ngModel)]="selectedPeca.nome" placeholder="nome"></div>
-  <div><label>Categoria: </label>{{selectedPeca.categoria}}</div>
-</div>
+<peca-detalhe [peca]="selectedPeca"></peca-detalhe>

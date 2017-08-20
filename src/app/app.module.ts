@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { PecaDetalheComponent } from './peca-detalhe.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PecaDetalheComponent
   ],
   imports: [
     BrowserModule,

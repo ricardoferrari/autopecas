@@ -1,28 +1,33 @@
-import { Component } from '@angular/core';
-export class Peca {
-	id: number;
-	nome: string;
-	categoria: string;
-	imagem: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { Peca } from './peca';
+import { PecaDetalheComponent } from './peca-detalhe.component';
+import { PecaService } from './peca.service';
 
-const PECAS: Peca[] = [
-  { id: 11, nome: 'Calota', categoria: 'Acabamento', imagem: null },
-  { id: 12, nome: 'Adesivo', categoria: 'Acabamento', imagem: null },
-  { id: 13, nome: 'Vela', categoria: 'Elétrica', imagem: null }
-];
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [PecaService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Autopeças';
   selectedPeca: Peca;
-  pecas = PECAS;
+  pecas : Peca[];
+
+  constructor(private pecaService: PecaService) { } 
 
   onSelect(peca: Peca): void {
 	  this.selectedPeca = peca;
   }
+
+  getPecas(): void {
+    this.pecaService.getPecas().then(pecas => this.pecas = pecas);
+  }
+
+  ngOnInit(): void {
+    this.getPecas();
+  }
+
+  
 }
