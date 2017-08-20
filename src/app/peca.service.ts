@@ -8,4 +8,8 @@ export class PecaService {
 	getPecas(): Promise<Peca[]> {
 		return Promise.resolve(PECAS);
 	}
+	getPeca(id: number): Promise<Peca> {
+	  return this.getPecas()
+	             .then(pecas => pecas.find(peca => peca.id === id));
+	}
 }

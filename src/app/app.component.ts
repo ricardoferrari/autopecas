@@ -1,33 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Peca } from './peca';
-import { PecaDetalheComponent } from './peca-detalhe.component';
-import { PecaService } from './peca.service';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [PecaService]
+  template: `
+    <h1>{{title}}</h1>
+    <nav>
+	    <a routerLink="/dashboard">Dashboard</a>
+	    <a routerLink="/pecas">Pe&ccedil;as</a>
+    </nav>
+   	<router-outlet></router-outlet>
+  `
 })
-export class AppComponent implements OnInit{
-  title = 'Autopeças';
-  selectedPeca: Peca;
-  pecas : Peca[];
 
-  constructor(private pecaService: PecaService) { } 
-
-  onSelect(peca: Peca): void {
-	  this.selectedPeca = peca;
-  }
-
-  getPecas(): void {
-    this.pecaService.getPecas().then(pecas => this.pecas = pecas);
-  }
-
-  ngOnInit(): void {
-    this.getPecas();
-  }
-
-  
+export class AppComponent {
+	title = 'Doutor FIAT';
 }
