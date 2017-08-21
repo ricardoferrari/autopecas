@@ -1,8 +1,18 @@
+<br>
+<div>
+  <label>Nome:</label> <input #pecaNome />
+  <button (click)="add(pecaNome.value); pecaNome.value=''">
+    Adiciona
+  </button>
+</div>
+
 <ul class="pecas">
   <li *ngFor="let peca of pecas" 
       (click) = "onSelect(peca)"
       [class.selected]="peca === selectedPeca" >
-            <span class="badge">{{peca.id}}</span> {{peca.nome}}
+            <span class="badge">{{peca.id}}</span>
+            <span>{{peca.nome}}</span>
+            <button class="delete" (click)="delete(peca); $event.stopPropagation()">X</button>
   </li>
 </ul>  
 

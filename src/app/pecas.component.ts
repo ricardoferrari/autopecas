@@ -27,6 +27,25 @@ export class PecasComponent implements OnInit{
     this.pecaService.getPecas().then(pecas => this.pecas = pecas);
   }
 
+  add(nome: string): void {
+    nome = nome.trim();
+    if (!nome) { return; }
+    this.pecaService.create(nome)
+      .then(peca => {
+        this.pecas.push(peca);
+        this.selectedPeca = null;
+      });
+  }
+
+  delete(peca: Peca): void {
+    this.pecaService
+        .delete(peca.id)
+        .then(() => {
+          this.pecas = this.pecas.filter(h => h !== peca);
+          if (this.selectedPeca === peca) { this.selectedPeca = null; }
+        });
+  }
+
   ngOnInit(): void {
     this.getPecas();
   }

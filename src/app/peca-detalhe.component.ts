@@ -28,6 +28,11 @@ export class PecaDetalheComponent implements OnInit {
 	    .subscribe(peca => this.peca = peca);
 	}
 
+	save(): void {
+	  this.pecaService.update(this.peca)
+	    .then(() => this.goBack());
+	}
+
 	goBack(): void {
 	  this.location.back();
 	}
