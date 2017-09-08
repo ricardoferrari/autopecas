@@ -1,8 +1,11 @@
 <div id="search-component">
   <h4>Busca peça</h4>
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <input #searchBox id="search-box" 
+  									(keyup)="search(searchBox.value, $event.keyCode)" 
+  									(blur)="limpaSelecao()" 
+  									(focus)="atualizaSelecao(searchBox.value)" />
   <div>
-    <div *ngFor="let peca of pecas | async"
+    <div *ngFor="let peca of pecas | async; let i = index;" [ngClass]="{'selecionado': selecionado == (i+1)}"
          (click)="gotoDetail(peca)" class="search-result" >
       {{peca.nome}}
     </div>

@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
  
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
+
+import { NgModule } from '@angular/core';
  
 // Observable class extensions
 import 'rxjs/add/observable/of';
- 
+
 // Observable operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
@@ -21,17 +23,50 @@ import { Peca } from './peca';
   styleUrls: [ './peca-search.component.css' ],
   providers: [PecaSearchService]
 })
+
 export class PecaSearchComponent implements OnInit {
   pecas: Observable<Peca[]>;
   private searchTerms = new Subject<string>();
- 
+  private selecionado = 0;
+  private selecionadoPeca:Peca;
+  private qtd: number = 0;
+  private inputState = "inactive";
+
   constructor(
     private pecaSearchService: PecaSearchService,
     private router: Router) {}
  
   // Push a search term into the observable stream.
-  search(term: string): void {
+  search(term: string, keyCode): void {
+
+    this.pecas.subscribe( message => { this.qtd = message.length });
+
+    switch(keyCode){
+      case 38: this.selecionado = (this.selecionado>0) ? (this.selecionado-1) : 0;
+      break;
+      case 40: this.selecionado = (this.selecionado<this.qtd) ? (this.selecionado+1) : this.selecionado;
+      break;
+      case 13: 
+          this.pecas.subscribe( message => { 
+            this.selecionadoPeca = message[this.selecionado-1]; 
+            if (message[this.selecionado-1]) this.gotoDetail(this.selecionadoPeca); 
+          });
+      break;
+    }
+
+
+
     this.searchTerms.next(term);
+  }
+
+  limpaSelecao(): void {
+    this.searchTerms.next();
+    this.inputState = "inactive";
+  }
+
+  atualizaSelecao(term):void {
+   this.inputState = "active";
+   this.searchTerms.next(term); 
   }
  
   ngOnInit(): void {
